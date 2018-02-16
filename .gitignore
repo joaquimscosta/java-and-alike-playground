@@ -105,5 +105,5 @@ gradle-app.setting
 # End of https://www.gitignore.io/api/java,gradle,intellij+all
 
 # ignore idea project file
-javalambdas.iml
-javalambdas.ipr
+*.iml
+*.ipr
