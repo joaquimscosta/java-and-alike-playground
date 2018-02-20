@@ -8,12 +8,12 @@ public interface Function<T,R>{
     R apply(T t)
 }
 ```
-a. T ---> Function ---> R
-b. This function could be used for **absolute value function**
-c. `(x,y) -> x + 1`
+    a. T ---> Function ---> R
+    b. This function could be used for **absolute value function**
+    c. `(x,y) -> x + 1`
 
 2. `ThreadLocal.withInitial(()->new SimpleDateFormat("dd-MMM-yyyy"))`
 3.
-a. Yes
-b. Yes
-c. No
+    a. Yes
+    b. Yes
+    c. No

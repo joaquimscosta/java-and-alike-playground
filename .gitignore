@@ -108,7 +108,7 @@ gradle-app.setting
 *.iml
 *.ipr
 
-## Project files 
+## Project files
 *.settings
 *.classpath
 *.project
