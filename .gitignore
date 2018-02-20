@@ -107,3 +107,8 @@ gradle-app.setting
 # ignore idea project file
 *.iml
 *.ipr
+
+## Project files 
+*.settings
+*.classpath
+*.project
