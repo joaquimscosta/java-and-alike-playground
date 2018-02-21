@@ -10,7 +10,7 @@ import java.util.function.Predicate;
  */
 public class Chapter1 {
 
-    private static  ThreadLocal<SimpleDateFormat> localthreadDateFormatter = ThreadLocal.withInitial(()->new SimpleDateFormat("dd-MMM-yyyy"));
+    private static final ThreadLocal<SimpleDateFormat> localthreadDateFormatter = ThreadLocal.withInitial(()->new SimpleDateFormat("dd-MMM-yyyy"));
 
     public static void main(String[] args) {
         Predicate<Integer> greaterThan5 = x -> x > 5;
