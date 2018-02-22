@@ -12,7 +12,9 @@ public class Chapter1 {
 
     private static final ThreadLocal<SimpleDateFormat> localthreadDateFormatter = ThreadLocal.withInitial(()->new SimpleDateFormat("dd-MMM-yyyy"));
 
-    public static void main(String[] args) {
+
+    @Test
+    public void example1{
         Predicate<Integer> greaterThan5 = x -> x > 5;
         System.out.println("3 > 5 = " + greaterThan5.test(3));
         System.out.println("7 > 5 = " + greaterThan5.test(7));
