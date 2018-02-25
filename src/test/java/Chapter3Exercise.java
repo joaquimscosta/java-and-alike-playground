@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Chapter2Exercise {
+public class Chapter3Exercise {
 
     // 1.a
     int addUp(Stream<Integer> numbers) {
@@ -37,7 +37,15 @@ public class Chapter2Exercise {
     // 2. convert code that count members external to internal iteration
     @Test
     public void exercise2(){
-        // int totalMembers = (List<Artist> artists)->artists.stream().mapToInt(artist->(int)artist.getMemebers().count()).sum();
+        List<Artist> artists = Arrays.asList();
+
+        int totalMembers = artists.stream().map(artist->artist.getMemebers().count()).reduce(0L, Long::sum).intValue();
+
+//        return artists.stream()
+//                .map(artist -> artist.getMembers().count())
+//                .reduce(0L, Long::sum)
+//                .intValue();
+//
     }
 
     class Artist{
@@ -49,7 +57,7 @@ public class Chapter2Exercise {
 
     // 6. count number of lowercase letters in a string
     @Test
-    public void excercise6(){
+    public void exercise6(){
         String text = "Hello World!";
         long charCount = text.chars().filter(c->Character.isLowerCase(c)).count();
         System.out.println(text + ".... charCount = " + charCount);

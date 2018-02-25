@@ -20,8 +20,8 @@ public interface Function<T,R>{
 * c. No
 
 ## Chapter 3 Exercise
-1. @see Chapter2Exercise.java
-2. @see Chapter2Exercise.java
+1. @see Chapter3Exercise.java
+2. @see Chapter3Exercise.java
 3.
 * a. Eager
 * b. Lazy
