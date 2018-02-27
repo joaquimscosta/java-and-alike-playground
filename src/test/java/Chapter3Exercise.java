@@ -1,4 +1,3 @@
-import com.sun.jdi.connect.Connector;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
@@ -6,10 +5,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.*;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -28,47 +25,43 @@ public class Chapter3Exercise {
                 .collect(Collectors.toList());
     }
 
-
     // 1.c
     List<Person> age28AndOver(Stream<Person> people) {
         return people.filter(person -> (person.getAge() >= 28)).collect(Collectors.toList());
     }
 
     // 2. convert code that count members external to internal iteration
-    @Test
-    public void exercise2(){
-        List<Artist> artists = Arrays.asList();
-
-        int totalMembers = artists.stream().map(artist->artist.getMemebers().count()).reduce(0L, Long::sum).intValue();
-
-//        return artists.stream()
-//                .map(artist -> artist.getMembers().count())
-//                .reduce(0L, Long::sum)
-//                .intValue();
-//
-    }
-
-    class Artist{
-        private Stream<Artist> memebers = Stream.empty();
-        public Stream<Artist> getMemebers() {
-            return memebers;
-        }
+    int countAllMembersInAlbum(List<Album> albums) {
+        return albums.stream().map(album -> album.getMembers().count()).reduce(0L, Long::sum).intValue();
     }
 
     // 6. count number of lowercase letters in a string
-    @Test
-    public void exercise6(){
-        String text = "Hello World!";
-        long charCount = text.chars().filter(c->Character.isLowerCase(c)).count();
-        System.out.println(text + ".... charCount = " + charCount);
+    long howMannyLowerCaseInString(String text) {
+        return text.chars().filter(Character::isLowerCase).count();
     }
-
 
 
     ////////////////
     //    TEST   //
     //////////////
 
+    @Test
+    public void testCountAllMembersInAlbum() {
+        Album a1 = new Album();
+        a1.setMembers(Stream.of(new Artist(), new Artist()));
+        Album a2 = new Album();
+        a2.setMembers(Stream.of(new Artist()));
+
+        int totalMembers = countAllMembersInAlbum(Arrays.asList(a1, a2));
+        assertThat(totalMembers, is(equalTo(3)));
+    }
+
+
+    @Test
+    public void testLowerCaseCount() {
+        long charCount = howMannyLowerCaseInString("Hello World");
+        assertThat(charCount, is(equalTo(8L)));
+    }
 
     @Test
     public void testAddUp() {

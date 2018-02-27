@@ -26,7 +26,12 @@ public interface Function<T,R>{
 * a. Eager
 * b. Lazy
 4.
-* a. higher-order because it takes a function as the argument.
-* b. no higher-order because argument or return is not a function
+* a. Yes, higher-order because it takes a function as the argument.
+* b. No, higher-order because argument or return is not a function
 5. a side-effect free
 6. @see Chapter2Exercise.java
+
+## Chapter 4 Exercise
+1. @see Chapter4Exercise.java
+2. No, you cannot overwrite the equals and hashCode method in a default method, because this two classes are defined in the Object class, so definition to the subclass will preserve
+3. @see Artists.java
