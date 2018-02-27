@@ -18,6 +18,6 @@ public class Artists {
     }
 
     public String getArtistName(int index){
-        return getArtist(index).map(artist->artist.getName()).orElse("unknown");
+        return getArtist(index).map(Artist::getName).orElse("unknown");
     }
 }
