@@ -8,13 +8,15 @@
 - https://hpbn.co/transport-layer-security-tls
 
 **SSL** - Secure Socket Layer
+
 **TLS** - Transport Layer Security
 
-SSL and TLS are used interchangeably, but note that SSL (old version) is now deprecated, because it is [not secure](https://en.wikipedia.org/wiki/POODLE). Most of the times when people are talking about SSL they mean TLS (basically the new version of SSL).
+SSL and TLS are used interchangeably, but note that SSL (old version) is now deprecated, because it is *[not secure]*(https://en.wikipedia.org/wiki/POODLE). Most of the times when people are talking about SSL they mean TLS (basically the new version of SSL).
 
 [OpenSSL](https://www.openssl.org/) is the *de facto* TLS implementation.
 You can use OpenSSL to generate you own TLS certificate, but *self-signed certificate*, but it is best to get the certificate from a central authority to.
 **Self-Signed Certificate** a self-signed certificate is an SSL certificate that is not signed by a trusted, central authority in the SSL/TLS certificate ecosystem.
+
 ![TLS](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/image_data/file/56800/TLS_diagram.png)
 
 
@@ -26,7 +28,8 @@ Central authorities that provide TLS certificate
 
 ## Authentication
 **Authentication** is the process to identify with whom the server is communicating.
-Some methods used to identify the user/entity
+
+Some methods used to identify the user:
 - [HTTP Basic Auth](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) (Username/Password)
 - [OAuth](https://oauth.net/1/) and [Auth 2.0](https://oauth.net/2/)
 - [Single Sign On](https://en.wikipedia.org/wiki/Single_sign-on)
