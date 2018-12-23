@@ -31,11 +31,18 @@ Central authorities that provide TLS certificate
 
 Some methods used to identify the user:
 - [HTTP Basic Auth](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) (Username/Password)
-- [OAuth](https://oauth.net/1/) and [Auth 2.0](https://oauth.net/2/)
+- [OAuth](https://oauth.net/1/) and [Auth 2.0](https://oauth.net/2)
 - [Single Sign On](https://en.wikipedia.org/wiki/Single_sign-on)
-- [JSON Web Tokens (JWT)](https://jwt.io/)
+- [JSON Web Tokens (JWT)](https://jwt.io)
 
 ## Authorization
 **Authorization** is about managing permission for users.
 
+[jBCrypt] (http://www.mindrot.org/projects/jBCrypt) password hashing algorithm.
 
+## Automated Tools for Securing Code/Website
+- [Snyk](https://snyk.io)
+- [SonarCube](https://www.sonarqube.org)
+- [SecurityHeaders] (https://securityheaders.com)
+- [Nessus/Tenable Scanner] (https://www.tenable.com/products/tenable-io/web-application-scanning)
+- [ZAProxy] (https://www.zaproxy.org)
