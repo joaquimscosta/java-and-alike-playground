@@ -38,11 +38,11 @@ Some methods used to identify the user:
 ## Authorization
 **Authorization** is about managing permission for users.
 
-[jBCrypt] (http://www.mindrot.org/projects/jBCrypt) password hashing algorithm.
+[jBCrypt](http://www.mindrot.org/projects/jBCrypt) password hashing algorithm.
 
 ## Automated Tools for Securing Code/Website
 - [Snyk](https://snyk.io)
 - [SonarCube](https://www.sonarqube.org)
-- [SecurityHeaders] (https://securityheaders.com)
-- [Nessus/Tenable Scanner] (https://www.tenable.com/products/tenable-io/web-application-scanning)
-- [ZAProxy] (https://www.zaproxy.org)
+- [SecurityHeaders](https://securityheaders.com)
+- [Nessus/Tenable Scanner](https://www.tenable.com/products/tenable-io/web-application-scanning)
+- [ZAProxy](https://www.zaproxy.org)
