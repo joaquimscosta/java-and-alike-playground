@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: aks-demo-controller
+spec:
+  replicas: 2
+  selector:
+    app: aks-demo
+  template:
+    metadata:
+      labels:
+        app: aks-demo
+    spec:
+      containers:
+        - name: aks-demo
+          image: joaquimcosta/aks-demo:v1
+          ports:
+            - containerPort: 8080

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aks-demo-deployment
+  labels:
+    app: aks-demo
+spec:
+  selector:
+    matchLabels:
+      app: aks-demo
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: aks-demo
+    spec:
+      containers:
+      - name: aks-demo
+        image: aksdemoacr.azurecr.io/aks-demo:v1
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: aks-demo-service
+spec:
+  selector:
+    app: aks-demo
+  ports:
+  - port: 8080
+  type: LoadBalancer
