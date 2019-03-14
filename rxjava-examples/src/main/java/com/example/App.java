@@ -4,8 +4,11 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
+import io.reactivex.observables.ConnectableObservable;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import io.reactivex.functions.Consumer;
 
@@ -16,6 +19,7 @@ import io.reactivex.functions.Consumer;
 public class App {
 
   private static final List<String> NAMES = Arrays.asList("Joaquim", "Nancy", "Thallia", "Camila");
+  private static final Action ON_COMPLETE = ()-> System.out.println("Done!");
 
 
   public static void main(String[] args) {
@@ -38,13 +42,8 @@ public class App {
   public static void example2() {
     // emits in 1 second intervals
     Observable.interval(1, TimeUnit.SECONDS).subscribe(seconds -> System.out.println(seconds));
-
     // Hold main thread so Observable has chance to fire
-    try {
-      Thread.sleep(5000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    sleep(5000);
   }
 
   public static void example3() {
@@ -141,15 +140,141 @@ public class App {
   }
 
   public static void example9() {
+    // Cold Observable
+    Observable<String> source = Observable.fromIterable(NAMES);
 
+    // first observer
+    source.subscribe(name -> System.out.println("Observer Received 1: " + name));
+
+    // second observer
+    source.subscribe(name -> System.out.println("Observer Received 2: " + name));
   }
 
   public static void example10() {
+    // Making cold observable into (hot)
+    ConnectableObservable<String> source = Observable.fromIterable(NAMES).publish();
 
+    // first observer
+    source.subscribe(name -> System.out.println("Observer 1: " + name));
+
+    // second observer
+    source
+        .map(String::length)
+        .subscribe(name -> System.out.println("Observer 2: " + name));
+
+    source.connect();
   }
 
   public static void example11() {
+    // Observable.range() : emit each number from a start value and increment each emission until the specified count is reached
+    // the two arguments for Observable.range() are not lower/upper bounds
+    Observable.range(1, 10).subscribe(System.out::println);
+  }
 
+  public static void example12() {
+    // Observable.interval(): emit a consecutive long emission (starting at 0) at every specified time interval
+    Observable.interval(1, TimeUnit.SECONDS)
+        .subscribe(second -> System.out.println(second + " Mississippi"));
+    sleep(5000);
+  }
+
+
+  public static void example13() {
+    // Observable.future() : RxJava Observables are much more robust
+    // and expressive than Futures, but if you have existing libraries that yield Futures,
+    // you can easily turn them into Observables via Observable.future()
+    Future<String> futureTask = new FutureTask<>(() -> System.out.println("noop future task"),
+        "Future Task Completed!");
+    Observable.fromFuture(futureTask)
+        .subscribe(result -> System.out.println("Received: " + result));
+  }
+
+
+  public static void example14() {
+    // Note that no emissions were printed because there were none.
+    // It went straight to calling onComplete,
+    // which printed the Done! message in the Observer
+    // ...(onNext, onError, onComplete)
+    Observable.empty().subscribe(
+        System.out::println,
+        Throwable::printStackTrace,
+        () -> System.out.println("Done!")
+    );
+  }
+
+
+  public static void example15() {
+    // Observable.never() : similar to ...empty() in addition,
+    // will never invoke onComplete(), and never emitting, ...making this Observable infinite
+    // ... primarily used for testing purpose
+    Observable.never().subscribe(
+        System.out::println,
+        Throwable::printStackTrace,
+        () -> System.out.println("Done!")
+    );
+
+    sleep(5000);
+  }
+
+  public static void example16() {
+    //  Observable.error() : create an Observable that immediately calls onError() with a specified exception
+    // ... primarily used for testing purpose
+    Observable.error(new Exception("Ouch... Error!")).subscribe(
+        System.out::println,
+        Throwable::printStackTrace,
+        ON_COMPLETE
+    );
+  }
+
+
+
+  public static void example17() {
+
+  }
+
+
+
+  public static void example18() {
+
+  }
+
+
+
+  public static void example19() {
+
+  }
+
+
+
+  public static void example20() {
+
+  }
+
+
+
+  public static void example21() {
+
+  }
+
+
+
+  public static void example22() {
+
+  }
+
+
+
+  public static void example23() {
+
+  }
+
+
+  public static void sleep(long millis) {
+    try {
+      Thread.sleep(millis);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 
 }
