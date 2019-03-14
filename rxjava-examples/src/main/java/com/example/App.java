@@ -2,6 +2,7 @@ package com.example;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
+import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.observables.ConnectableObservable;
@@ -19,13 +20,11 @@ import io.reactivex.functions.Consumer;
 public class App {
 
   private static final List<String> NAMES = Arrays.asList("Joaquim", "Nancy", "Thallia", "Camila");
-  private static final Action ON_COMPLETE = ()-> System.out.println("Done!");
-
+  private static final Action ON_COMPLETE = () -> System.out.println("Done!");
 
   public static void main(String[] args) {
     System.out.println("Hello World!");
   }
-
 
   public static void example1() {
     // The Observable is a push-based, composable iterator.
@@ -226,24 +225,43 @@ public class App {
     );
   }
 
-
+  static int start = 5;
+  static int count = 10;
 
   public static void example17() {
-
+    // Observable.defer() : ability to create a separate state for each Observer.
+    // when your source is stateful and you want to create a separate state for each Observer,
+    // Observable may not capture something that has changed about its parameters and send emissions that are obsolete
+    Observable<Integer> source = Observable.defer(() -> Observable.range(start, count));
+    source.subscribe(System.out::println);
+    // modifying count, now should be 5, 6, 7
+    count = 3;
+    source.subscribe(System.out::println);
   }
-
 
 
   public static void example18() {
-
+    // Observable.fromCallable() : if a procedure throws an error, we want it to be emitted up the Observable chain through onError()
+    // rather than throw the error at that location in traditional Java fashion.
+    // For instance, if you try to wrap Observable.just() around an expression that divides  1 by 0,
+    // the exception will be thrown, not emitted up to Observer. We resolve this issue by using .... fromCallable()
+    // BAD --> Observable.just(1/0).subscribe(System.out::println, Throwable::printStackTrace);
+    Observable.fromCallable(() -> 1 / 0).subscribe(
+        System.out::println,
+        e -> System.out.println("onError: " + e.getMessage())
+    );
   }
-
 
 
   public static void example19() {
-
+    //Single<T> is essentially an Observable<T> that will only emit one item.
+    // It works just like an Observable, but it is limited only to operators that make sense for a single emission
+    Observable.fromIterable(NAMES)
+        .single("Oops")
+        .subscribe(System.out::println, Throwable::printStackTrace);
+    // Better yet
+    Single.just(NAMES.get(0)).subscribe(System.out::println, Throwable::printStackTrace);
   }
-
 
 
   public static void example20() {
@@ -251,17 +269,14 @@ public class App {
   }
 
 
-
   public static void example21() {
 
   }
 
 
-
   public static void example22() {
 
   }
-
 
 
   public static void example23() {
