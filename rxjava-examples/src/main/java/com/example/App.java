@@ -1,5 +1,7 @@
 package com.example;
 
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.Single;
@@ -265,21 +267,59 @@ public class App {
 
 
   public static void example20() {
+    // Maybe is just like a Single except that it allows no emission to occur (hence Maybe), 0 or 1 time
 
+    // has emission
+    Maybe.just(100).subscribe(System.out::println, Throwable::printStackTrace, ON_COMPLETE);
+
+    // no emission
+    Maybe.empty().subscribe(System.out::println, Throwable::printStackTrace, ON_COMPLETE);
+
+    // firstElement returns a Maybe
+    // this emit 0 (empty) or 1, (but we know it will emit because we have items in the NAMES)
+    Observable.just(NAMES)
+        .firstElement()
+        .subscribe(
+            (name) -> System.out.println("Received: " + name),
+            Throwable::printStackTrace,
+            ON_COMPLETE);
   }
 
 
   public static void example21() {
+    // Completable is simply concerned with an action being executed,
+    // but it does not receive any emissions. It does not have onNext()
+    // or onSuccess() to receive emissions, but it does have onError() and onComplete()
 
+    // will invoke onComplete immediately
+    Completable.complete();
+
+    // execute the action passed the runnable, then invoke onComplete
+    Completable.fromRunnable(() -> System.out.print("Running some process")).subscribe(ON_COMPLETE);
   }
 
 
   public static void example22() {
+    //The Disposable is a link between an Observable and an active Observer,
+    // and you can call its dispose() method to stop emissions and dispose
+    // of all resources used for that Observer
+    Observable<Long> seconds = Observable.interval(1, TimeUnit.SECONDS);
+    Disposable disposable = seconds
+        .subscribe((second) -> System.out.println("Received: " + second));
 
+    sleep(5000);
+
+    // this will stop emissions
+    disposable.dispose();
+
+    // wait 5 seconds to show emission stopped
+    sleep(5000);
   }
 
 
   public static void example23() {
+
+
 
   }
 
