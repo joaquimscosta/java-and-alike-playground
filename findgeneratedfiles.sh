@@ -1,0 +1,1 @@
+find . -name build && find . -name bin && find . -name out && find . -name .settings && find . -name .project
