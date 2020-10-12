@@ -34,7 +34,7 @@ public class RaceCondition {
     return IntStream.range(0, 1000);
   }
 
-  // this class is not thread safee
+  // this class is not thread safe
   static class LongWrapper {
 
     private long value;
