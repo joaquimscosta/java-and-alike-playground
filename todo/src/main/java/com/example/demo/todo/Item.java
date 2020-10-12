@@ -3,14 +3,17 @@ package com.example.demo.todo;
 import java.time.Instant;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-public class Item {
+@Getter
+@Setter
+@NoArgsConstructor
+public class Item extends PersistableIdentifier<Long> {
 
-  @Id
-  private Long id;
   private String name;
   private boolean completed;
   private Instant createdOn;

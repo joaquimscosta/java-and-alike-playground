@@ -16,10 +16,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Todo {
+public class Todo extends PersistableIdentifier<Long> {
 
-  @Id
-  private Long id;
   private String name;
   private String description;
   @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
@@ -28,23 +26,5 @@ public class Todo {
   public Todo(String name, String description) {
     this.name = name;
     this.description = description;
-  }
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof Todo)) {
-      return false;
-    }
-    Todo todo = (Todo) o;
-    return Objects.equals(getId(), todo.getId());
-  }
-
-  @Override
-  public int hashCode() {
-    return 31;
   }
 }
