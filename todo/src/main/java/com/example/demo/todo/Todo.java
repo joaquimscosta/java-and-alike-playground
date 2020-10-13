@@ -22,9 +22,4 @@ public class Todo extends PersistableIdentifier<Long> {
   private String description;
   @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
   private List<Item> items = new ArrayList<>();
-
-  public Todo(String name, String description) {
-    this.name = name;
-    this.description = description;
-  }
 }

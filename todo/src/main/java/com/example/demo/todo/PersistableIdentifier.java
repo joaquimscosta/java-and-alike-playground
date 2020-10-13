@@ -1,11 +1,12 @@
 package com.example.demo.todo;
 
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-abstract class PersistableIdentifier<T> {
+abstract class PersistableIdentifier<T> implements Serializable {
 
   @Id
   protected T id;
